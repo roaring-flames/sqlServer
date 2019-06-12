@@ -1,5 +1,8 @@
 package com.example.sqlserver.domain;
 
+/**
+ * 添加注释
+ */
 public class User {
 
     private Long userId;
