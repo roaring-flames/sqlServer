@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAllUsers();
-    int addUser( User user );
-    int deleteUser( User user );
+
+    boolean addUser(User user);
+
+    boolean deleteUser(User user);
+
+    boolean updatePerson(User user);
 }
