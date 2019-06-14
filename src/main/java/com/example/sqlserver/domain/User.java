@@ -1,6 +1,7 @@
 package com.example.sqlserver.domain;
 
 /**
+ * 数据库实体
  * 添加注释
  */
 public class User {
