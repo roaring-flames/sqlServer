@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.sqlserver.dao.UserMapper" >
+<mapper namespace="com.example.sqlserver.dao.UserMapper">
 
     <resultMap id="userMap" type="com.example.sqlserver.domain.User">
-        <id property="userId" column="user_id" javaType="java.lang.Long"></id>
+        <result property="userId" column="user_id" javaType="java.lang.Long"></result>
         <result property="userName" column="user_name" javaType="java.lang.String"></result>
         <result property="sex" column="sex" javaType="java.lang.Boolean"></result>
         <result property="createdTime" column="created_time" javaType="java.lang.String"></result>
     </resultMap>
-
     <select id="getAllUsers" resultMap="userMap">
-        select * from user_test
+        select *
+        from user_test
     </select>
 
+
     <insert id="addUser" parameterType="com.example.sqlserver.domain.User">
-        insert into user_test ( user_id, user_name, sex, created_time ) values ( #{userId}, #{userName}, #{sex}, #{createdTime} )
+        insert into user_test (user_id, user_name, sex, created_time)
+        values (#{userId}, #{userName}, #{sex}, #{createdTime})
     </insert>
 
     <delete id="deleteUser" parameterType="com.example.sqlserver.domain.User">
-        delete from user_test where user_name = #{userName}
+        delete
+        from user_test
+        where user_name = #{userName}
     </delete>
+
+    <update id="updatePerson" parameterType="com.example.sqlserver.domain.User">
+        update user_test
+        <trim prefix="set" suffixOverrides="," suffix="where user_id=#{userId}">
+            <if test="userName!=null">
+                user_name = #{userName},
+            </if>
+            <if test="sex!=null">
+                sex = #{sex},
+            </if>
+            <if test="createdTime!=null">
+                created_time = #{createdTime},
+            </if>
+        </trim>
+        <!--where user_id=#{userId}-->
+
+    </update>
 
 </mapper>
